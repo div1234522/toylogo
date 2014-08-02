@@ -1,0 +1,12 @@
+BEGIN
+CLS
+RESET
+F 0.2
+R 90
+F 0.2
+R 90
+F 0.2
+R 90
+F 0.2
+R 90
+END
