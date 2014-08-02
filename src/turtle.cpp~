@@ -26,58 +26,136 @@
 
 #include "turtle.hpp"
 
+#define DEGREE_TO_RAD(x) ((x*M_PI)/180.0)
+
 void turtle_t::reset(void) 
-{ }
+{
+    set_pos(0.0, 0.0);
+}
 
 void turtle_t::clear(void)
-{ }
+{
+    glClearColor(bg_col.r, bg_col.g, bg_col.b, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
 
 void turtle_t::set_pos(const vertex_t _pos)
-{ }
+{
+    pos = _pos;
+}
 
 void turtle_t::set_pos(const double _x, const double _y)
-{ }
+{
+    pos.x = _x;
+    pos.y = _y;
+}
 
 void turtle_t::set_dir(const double _dir)
-{ }
+{
+    dir = _dir;
+}
 
 void turtle_t::set_col(const color_t _col)
-{ }
+{
+    col = _col;
+}
 
 void turtle_t::set_col(const double _r, const double _g, const double _b)
-{ }
+{
+    col.r = _r;
+    col.g = _g;
+    col.b = _b;
+}
 
 void turtle_t::set_bgcol(const double _r, const double _g, const double _b)
-{ }
+{
+    bg_col.r = _r;
+    bg_col.g = _g;
+    bg_col.b = _b;
+    glClearColor(bg_col.r, bg_col.g, bg_col.b, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
 
 void turtle_t::scale(const double _s)
-{ }
+{ 
+    sc = _s;
+}
 
 void turtle_t::turn_left(const double _angle)    
-{ }
+{
+    dir += _angle;
+    if (dir > 360)
+    {
+        dir -= 360;
+    }
+}
 
 void turtle_t::turn_right(const double _angle)
-{ }
+{
+    dir -= _angle;
+    if (dir < 0)
+    {
+        dir += 360;
+    }
+}
 
 void turtle_t::forward(const double _dist)  
-{ 
-  glColor4f(col.r, col.g, col.b, 1.0);
-  glBegin(GL_LINES);
-  glVertex3f(0.0f,  0.5f,  0.0f);
-  glVertex3f(0.5f, -0.5f,  0.0f);
-  glEnd(); }
+{
+    double x = _dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x;
+    double y = _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y;
+    
+    glColor4f(col.r, col.g, col.b, 1.0);
+    glBegin(GL_LINES);
+    glVertex3f(pos.x,  pos.y,  0.0f);
+    glVertex3f(x, y,  0.0f);
+    glEnd();
+    
+    vertex_t newPos;
+    newPos.x = x;
+    newPos.y = y;
+    pos = newPos;
+}
 
 void turtle_t::back(const double _dist)   
-{ }
+{
+    double x = _dist * sc * cos(DEGREE_TO_RAD(dir + 180)) + pos.x;
+    double y = _dist * sc * sin(DEGREE_TO_RAD(dir + 180)) + pos.y;
+    
+    glColor4f(col.r, col.g, col.b, 1.0);
+    glBegin(GL_LINES);
+    glVertex3f(pos.x,  pos.y,  0.0f);
+    glVertex3f(x, y,  0.0f);
+    glEnd();
+    
+    vertex_t newPos;
+    newPos.x = x;
+    newPos.y = y;
+    pos = newPos;
+}
 
 void turtle_t::forward_move(const double _dist)
-{ }
+{
+    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y);
+}
 
 void turtle_t::backward_move(const double _dist)
-{ }
+{
+    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir + 180)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir + 180)) + pos.y);
+}
 
 void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
-{ }
+{ 
+    int i;
+    int n=*&_n;
+    turtle_com_t *c = new turtle_com_t [n];
+	
+    /*
+    for(i=0; i<*&_n; i++)
+    {
+	c[i] = &_replist[i];
+    }
+    */
+}
 
 void turtle_t::exec(turtle_com_t *com)
 {

@@ -26,7 +26,7 @@
 
 #include "turtle.hpp"
 
-#define DEGREE_TO_RAD(x) x * M_PI / 180.0
+#define DEGREE_TO_RAD(x) ((x*M_PI)/180.0)
 
 void turtle_t::reset(void) 
 {
@@ -35,6 +35,8 @@ void turtle_t::reset(void)
 
 void turtle_t::clear(void)
 {
+    glClearColor(bg_col.r, bg_col.g, bg_col.b, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void turtle_t::set_pos(const vertex_t _pos)
@@ -67,11 +69,17 @@ void turtle_t::set_col(const double _r, const double _g, const double _b)
 
 void turtle_t::set_bgcol(const double _r, const double _g, const double _b)
 {
-    
+    bg_col.r = _r;
+    bg_col.g = _g;
+    bg_col.b = _b;
+    glClearColor(bg_col.r, bg_col.g, bg_col.b, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void turtle_t::scale(const double _s)
-{ }
+{ 
+    sc = _s;
+}
 
 void turtle_t::turn_left(const double _angle)    
 {
@@ -93,8 +101,8 @@ void turtle_t::turn_right(const double _angle)
 
 void turtle_t::forward(const double _dist)  
 {
-    double x = _dist * cos(DEGREE_TO_RAD(dir)) + pos.x;
-    double y = _dist * sin(DEGREE_TO_RAD(dir)) + pos.y;
+    double x = _dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x;
+    double y = _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y;
     
     glColor4f(col.r, col.g, col.b, 1.0);
     glBegin(GL_LINES);
@@ -110,8 +118,8 @@ void turtle_t::forward(const double _dist)
 
 void turtle_t::back(const double _dist)   
 {
-    double x = _dist * cos(DEGREE_TO_RAD(dir + 180)) + pos.x;
-    double y = _dist * sin(DEGREE_TO_RAD(dir + 180)) + pos.y;
+    double x = _dist * sc * cos(DEGREE_TO_RAD(dir + 180)) + pos.x;
+    double y = _dist * sc * sin(DEGREE_TO_RAD(dir + 180)) + pos.y;
     
     glColor4f(col.r, col.g, col.b, 1.0);
     glBegin(GL_LINES);
@@ -127,16 +135,27 @@ void turtle_t::back(const double _dist)
 
 void turtle_t::forward_move(const double _dist)
 {
-    set_pos (_dist * cos(DEGREE_TO_RAD(dir)) + pos.x, _dist * sin(DEGREE_TO_RAD(dir)) + pos.y);
+    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y);
 }
 
 void turtle_t::backward_move(const double _dist)
 {
-    set_pos (_dist * cos(DEGREE_TO_RAD(dir + 180)) + pos.x, _dist * sin(DEGREE_TO_RAD(dir + 180)) + pos.y);
+    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir + 180)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir + 180)) + pos.y);
 }
 
 void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
-{ }
+{ 
+    int i;
+    int n=*&_n;
+    turtle_com_t *c = new turtle_com_t [n];
+	
+    /*
+    for(i=0; i<*&_n; i++)
+    {
+	c[i] = &_replist[i];
+    }
+    */
+}
 
 void turtle_t::exec(turtle_com_t *com)
 {

@@ -70,7 +70,7 @@ public:
     //Set the current draw color
     col.r = 1.0; col.g = 1.0; col.b = 1.0;
     bg_col.r = 0.0; bg_col.g=0.0; bg_col.b=0.0;
-    sc=1.0;
+    scale=1.0;
   }
 
   //Copy Constructor
@@ -80,7 +80,7 @@ public:
     dir = turt.dir;
     col.r = turt.col.r; col.g = turt.col.g; col.b = turt.col.b;
     bg_col.r = turt.bg_col.r; bg_col.g = turt.bg_col.g; bg_col.b = turt.bg_col.b;
-    sc=1.0;
+    scale=1.0;
   }
 
   //Default Destructor
