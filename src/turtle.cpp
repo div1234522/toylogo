@@ -110,10 +110,8 @@ void turtle_t::forward(const double _dist)
     glVertex3f(x, y,  0.0f);
     glEnd();
     
-    vertex_t newPos;
-    newPos.x = x;
-    newPos.y = y;
-    pos = newPos;
+    pos.x = x;
+    pos.y = y;
 }
 
 void turtle_t::back(const double _dist)   
@@ -144,17 +142,14 @@ void turtle_t::backward_move(const double _dist)
 }
 
 void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
-{ 
-    int i;
-    int n=*&_n;
-    turtle_com_t *c = new turtle_com_t [n];
-	
-    /*
-    for(i=0; i<*&_n; i++)
+{
+    for(int i = 0; i < _n; i++)
     {
-	c[i] = &_replist[i];
+        for (int j = 0; j < _replist.size(); j++)
+        {
+            exec (_replist[j]);
+        }
     }
-    */
 }
 
 void turtle_t::exec(turtle_com_t *com)
