@@ -134,7 +134,8 @@ void turtle_t::back(const double _dist)
 
 void turtle_t::forward_move(const double _dist)
 {
-    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y);
+    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x,
+             _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y);
 }
 
 void turtle_t::backward_move(const double _dist)
