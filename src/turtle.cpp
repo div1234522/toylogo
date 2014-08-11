@@ -31,6 +31,7 @@
 void turtle_t::reset(void) 
 {
     set_pos(0.0, 0.0);
+    dir = 0;
 }
 
 void turtle_t::clear(void)
@@ -145,16 +146,8 @@ void turtle_t::backward_move(const double _dist)
 
 void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
 { 
-    int i;
-    int n=*&_n;
-    turtle_com_t *c = new turtle_com_t [n];
-	
-    /*
-    for(i=0; i<*&_n; i++)
-    {
-	c[i] = &_replist[i];
-    }
-    */
+  for(int i=0; i<_n; i++)
+    exec(_replist[i]);
 }
 
 void turtle_t::exec(turtle_com_t *com)
