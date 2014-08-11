@@ -32,6 +32,7 @@ void turtle_t::reset(void)
 {
     set_pos(0.0, 0.0);
     set_dir (0.0f);
+    scale (1.0f);
 }
 
 void turtle_t::clear(void)
