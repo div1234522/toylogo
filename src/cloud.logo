@@ -1,0 +1,51 @@
+    BEGIN
+    BGCOL 0.11764 0.5647 1
+    CLS
+    RESET
+    SCALE 0.25
+
+    REPEAT 5
+        L 75
+        REPEAT 9
+            F 0.05
+            R 10
+        ENDREP
+        L 15
+
+        L 90
+        REPEAT 19
+            F 0.07
+            R 10
+        ENDREP
+        L 100
+
+        L 35
+        REPEAT 7
+            F 0.03
+            R 10
+        ENDREP
+        L 35
+
+        L 65
+        REPEAT 15
+            F 0.04
+            R 10
+        ENDREP
+        L 85
+
+        L 35
+        REPEAT 15
+            F 0.04
+            R 10
+        ENDREP
+        L 115
+
+        R 90
+        MF 0.000001
+        L 90
+        
+        L 180
+        MF 2.1295
+        R 180
+    ENDREP
+END
