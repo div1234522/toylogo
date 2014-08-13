@@ -46,7 +46,8 @@ void koch(turtle_t &turt, double x)
 {
    turt.reset();
    turt.clear();
-   turt.set_pos(-0.5, 0.3);
+   turt.set_pos(-0.3, 0.5);
+   turt.turn_right(30);
 
    for (int i = 0; i<3; i++)
      {
