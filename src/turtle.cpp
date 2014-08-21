@@ -86,19 +86,11 @@ void turtle_t::scale(const double _s)
 void turtle_t::turn_left(const double _angle)    
 {
     dir += _angle;
-    if (dir > 360)
-    {
-        dir -= 360;
-    }
 }
 
 void turtle_t::turn_right(const double _angle)
 {
     dir -= _angle;
-    if (dir < 0)
-    {
-        dir += 360;
-    }
 }
 
 void turtle_t::forward(const double _dist)  
@@ -118,8 +110,8 @@ void turtle_t::forward(const double _dist)
 
 void turtle_t::back(const double _dist)   
 {
-    double x = _dist * sc * cos(DEGREE_TO_RAD(dir + 180)) + pos.x;
-    double y = _dist * sc * sin(DEGREE_TO_RAD(dir + 180)) + pos.y;
+    double x = _dist * sc * cos(DEGREE_TO_RAD(dir - 180)) + pos.x;
+    double y = _dist * sc * sin(DEGREE_TO_RAD(dir - 180)) + pos.y;
     
     glColor4f(col.r, col.g, col.b, 1.0);
     glBegin(GL_LINES);
@@ -141,7 +133,7 @@ void turtle_t::forward_move(const double _dist)
 
 void turtle_t::backward_move(const double _dist)
 {
-    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir + 180)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir + 180)) + pos.y);
+    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir - 180)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir - 180)) + pos.y);
 }
 
 void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
