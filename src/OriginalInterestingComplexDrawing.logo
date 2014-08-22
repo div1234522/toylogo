@@ -42,12 +42,11 @@ R 180
 MF 0.5
 R 90
 MF 0.5
-SCALE 0.25
 
 COL 1 0.69803 0.4
 REPEAT 36
 REPEAT 4
-F 0.6
+F 0.15
 R 90
 ENDREP
 R 10
@@ -56,7 +55,7 @@ ENDREP
 COL 1 0.27058 0.0
 REPEAT 180
 REPEAT 36
-F 0.05
+F 0.0125
 R 10
 ENDREP
 R 2
@@ -219,12 +218,11 @@ R 180
 MF 0.5
 R 90
 MF 0.5
-SCALE 0.25
 
 COL 1 0.69803 0.4
 REPEAT 90
 REPEAT 4
-F 0.5
+F 0.125
 R 90
 ENDREP
 R 4
@@ -234,55 +232,54 @@ ENDREP
 
 RESET
 COL 1 1 1
-MF 0.4
+MF 0.1
 L 90
-MF 0.6
+MF 0.15
 R 90
 
-SCALE 0.25
 
 REPEAT 5
     L 75
     REPEAT 9
-        F 0.05
+        F 0.0125
         R 10
     ENDREP
     L 15
 
     L 90
     REPEAT 19
-        F 0.07
+        F 0.0175
         R 10
     ENDREP
     L 100
 
     L 35
     REPEAT 7
-        F 0.03
+        F 0.0075
         R 10
     ENDREP
     L 35
 
     L 65
     REPEAT 15
-        F 0.04
+        F 0.01
         R 10
     ENDREP
     L 85
 
     L 35
     REPEAT 15
-        F 0.04
+        F 0.01
         R 10
     ENDREP
     L 115
 
     R 90
-    MF 0.000001
+    MF 0.00000025
     L 90
         
     L 180
-    MF 2.1295
+    MF 0.532375
     R 180
 ENDREP
 
@@ -297,18 +294,16 @@ L 90
 MF 0.27
 L 90
 
-SCALE 0.4
-
 
 REPEAT 100
-    F 0.4
+    F 0.16
 
     R 90
-    F 0.001
+    F 0.0004
     L 90
 
     R 180
-    F 0.399
+    F 0.1596
     R 180
 ENDREP
 
@@ -320,17 +315,16 @@ L 90
 MF 0.27
 L 90
 
-SCALE 0.4
 
 REPEAT 100
-    F 0.4
+    F 0.16
 
     R 90
-    F 0.001
+    F 0.0004
     L 90
 
     R 180
-    F 0.401
+    F 0.1604
     R 180
 ENDREP
 
@@ -348,21 +342,21 @@ R 90
 MF 0.2
 L 180
 
-SCALE 0.4
+
 REPEAT 100
-    F 0.8
+    F 0.32
 
     R 90
-    F 0.001
+    F 0.0004
     L 90
 
     R 180
-    F 0.8
+    F 0.32
     R 180
 ENDREP
 
 RESET
-SCALE 1
+
 R 180
 MF 0.52
 L 90
@@ -375,25 +369,23 @@ L 90
 
 COL 0 0 0 
 
-SCALE 0.04
 
 REPEAT 90
 REPEAT 4
-F 0.5
+F 0.02
 R 90
 ENDREP
 R 4
 ENDREP
 
-SCALE 0.4
 
-MF 0.38
 
-SCALE 0.04
+MF 0.152
+
 
 REPEAT 90
 REPEAT 4
-F 0.5
+F 0.02
 R 90
 ENDREP
 R 4
@@ -405,15 +397,14 @@ L 90
 MF 0.1
 R 90
 
-SCALE 0.2
 
 COL 0.0 0.0 0.0
 L 135
-MF 0.2
+MF 0.04
 R 180
-F 0.2
+F 0.04
 L 90
-F 0.2
+F 0.04
 
 RESET
 
@@ -423,15 +414,13 @@ R 90
 
 MF 0.1
 
-SCALE 0.2
-
 COL 0.0 0.0 0.0
 L 135
-MF 0.2
+MF 0.04
 R 180
-F 0.2
+F 0.04
 L 90
-F 0.2
+F 0.04
 
 RESET
 
@@ -441,14 +430,13 @@ R 90
 
 MF 0.2
 
-SCALE 0.2
 
 COL 0.0 0.0 0.0
 L 135
-MF 0.2
+MF 0.04
 R 180
-F 0.2
+F 0.04
 L 90
-F 0.2
+F 0.04
 
 END
