@@ -20,43 +20,92 @@
 
 
 #include "render_drawing.hpp"
+#include "gl_framework.hpp"
 
+int depth = 7;
 
-void triline(turtle_t &turt, double length)
+//The recursive function that'll draw all the upside down triangles
+void subTriangle(int n, float x1, float y1, float x2, float y2, float x3, float y3)
 {
-   if (length <= 0.01)
-   {
-      turt.forward(length);
-   }
-   else
-   {
-     double newlength = length/3.0;
-     triline(turt, newlength);
-     turt.turn_left(60);
-     triline(turt, newlength);
-     turt.turn_right(120);
-     triline(turt, newlength);
-     turt.turn_left(60);
-     triline(turt, newlength);
-   }
+    //Draw the 3 sides as black lines
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    glBegin(GL_LINES);
+    glVertex3f(x1,  y1,  0.0f);
+    glVertex3f(x2, y2,  0.0f);
+    glVertex3f(x1,  y1,  0.0f);
+    glVertex3f(x3,  y3,  0.0f);
+    glVertex3f(x2,  y2,  0.0f);
+    glVertex3f(x3,  y3,  0.0f);
+    glEnd();
+    
+    //Calls itself 3 times with new corners, but only if the current number of recursions is smaller than the maximum depth
+    if(n < depth)
+    {
+        //Smaller triangle 1
+        subTriangle
+        (
+         n+1, //Number of recursions for the next call increased with 1
+         (x1 + x2) / 2 + (x2 - x3) / 2, //x coordinate of first corner
+         (y1 + y2) / 2 + (y2 - y3) / 2, //y coordinate of first corner
+         (x1 + x2) / 2 + (x1 - x3) / 2, //x coordinate of second corner
+         (y1 + y2) / 2 + (y1 - y3) / 2, //y coordinate of second corner
+         (x1 + x2) / 2, //x coordinate of third corner
+         (y1 + y2) / 2  //y coordinate of third corner
+         );
+        //Smaller triangle 2
+        subTriangle
+        (
+         n+1, //Number of recursions for the next call increased with 1
+         (x3 + x2) / 2 + (x2 - x1) / 2, //x coordinate of first corner
+         (y3 + y2) / 2 + (y2 - y1) / 2, //y coordinate of first corner
+         (x3 + x2) / 2 + (x3 - x1) / 2, //x coordinate of second corner
+         (y3 + y2) / 2 + (y3 - y1) / 2, //y coordinate of second corner
+         (x3 + x2) / 2, //x coordinate of third corner
+         (y3 + y2) / 2  //y coordinate of third corner
+         );
+        //Smaller triangle 3
+        subTriangle
+        (
+         n+1, //Number of recursions for the next call increased with 1
+         (x1 + x3) / 2 + (x3 - x2) / 2, //x coordinate of first corner
+         (y1 + y3) / 2 + (y3 - y2) / 2, //y coordinate of first corner
+         (x1 + x3) / 2 + (x1 - x2) / 2, //x coordinate of second corner
+         (y1 + y3) / 2 + (y1 - y2) / 2, //y coordinate of second corner
+         (x1 + x3) / 2, //x coordinate of third corner
+         (y1 + y3) / 2  //y coordinate of third corner
+         );
+    }
 }
 
-//Drawing a Koch Snowflake
-void koch(turtle_t &turt, double x)
+//Drawing a Sierpinski Triangle
+void drawSierpinski(float x1, float y1, float x2, float y2, float x3, float y3)
 {
-   turt.reset();
-   turt.clear();
-   turt.set_pos(-0.3, 0.5);
-   turt.turn_right(30);
-
-   for (int i = 0; i<3; i++)
-     {
-       triline(turt, x);
-       turt.turn_right(120);
-     }
+    //Draw the 3 sides of the triangle as black lines
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    glBegin(GL_LINES);
+    glVertex3f(x1,  y1,  0.0f);
+    glVertex3f(x2,  y2,  0.0f);
+    glVertex3f(x1,  y1,  0.0f);
+    glVertex3f(x3,  y3,  0.0f);
+    glVertex3f(x2,  y2,  0.0f);
+    glVertex3f(x3,  y3,  0.0f);
+    glEnd();
+    
+    //Call the recursive function that'll draw all the rest. The 3 corners of it are always the centers of sides, so they're averages
+    subTriangle
+    (
+     1, //This represents the first recursion
+     (x1 + x2) / 2, //x coordinate of first corner
+     (y1 + y2) / 2, //y coordinate of first corner
+     (x1 + x3) / 2, //x coordinate of second corner
+     (y1 + y3) / 2, //y coordinate of second corner
+     (x2 + x3) / 2, //x coordinate of third corner
+     (y2 + y3) / 2  //y coordinate of third corner
+     );
 }
 
 void render_drawing(turtle_t &turt)
 {
-  koch(turt, 1.0);
+    int h = 640, w = 480;
+    drawSierpinski(10, h - 10, w - 10, h - 10, w / 2, 10);
 }
