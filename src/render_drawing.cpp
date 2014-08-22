@@ -20,92 +20,104 @@
 
 
 #include "render_drawing.hpp"
-#include "gl_framework.hpp"
+#include <cmath>
 
-int depth = 7;
+int depth = 5;
 
-//The recursive function that'll draw all the upside down triangles
-void subTriangle(int n, float x1, float y1, float x2, float y2, float x3, float y3)
+void subTriangle(turtle_t &turt, int n, float x1, float y1, float x2, float y2, float x3, float y3)
 {
-    //Draw the 3 sides as black lines
-    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-    glBegin(GL_LINES);
-    glVertex3f(x1,  y1,  0.0f);
-    glVertex3f(x2, y2,  0.0f);
-    glVertex3f(x1,  y1,  0.0f);
-    glVertex3f(x3,  y3,  0.0f);
-    glVertex3f(x2,  y2,  0.0f);
-    glVertex3f(x3,  y3,  0.0f);
-    glEnd();
+    turt.set_pos(x1,  y1);
+    turt.set_dir(-60);
+    double dis = sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+    turt.forward(dis);
+
+    turt.set_pos(x2,  y2);
+    turt.set_dir(60);
+    dis = sqrt((x2-x3)*(x2-x3) + (y2-y3)*(y2-y3));
+    turt.forward(dis);
     
-    //Calls itself 3 times with new corners, but only if the current number of recursions is smaller than the maximum depth
+    turt.set_pos(x3,  y3);
+    turt.set_dir(180);
+    dis = sqrt((x1-x3)*(x1-x3) + (y1-y3)*(y1-y3));
+    turt.forward(dis);
+    
     if(n < depth)
     {
-        //Smaller triangle 1
         subTriangle
         (
-         n+1, //Number of recursions for the next call increased with 1
-         (x1 + x2) / 2 + (x2 - x3) / 2, //x coordinate of first corner
-         (y1 + y2) / 2 + (y2 - y3) / 2, //y coordinate of first corner
-         (x1 + x2) / 2 + (x1 - x3) / 2, //x coordinate of second corner
-         (y1 + y2) / 2 + (y1 - y3) / 2, //y coordinate of second corner
-         (x1 + x2) / 2, //x coordinate of third corner
-         (y1 + y2) / 2  //y coordinate of third corner
+         turt,
+         n+1,
+         (x1 + x2) / 2 + (x1 - x3) / 2,
+         (y1 + y2) / 2 + (y1 - y3) / 2,
+         (x1 + x2) / 2 + (x2 - x3) / 2,
+         (y1 + y2) / 2 + (y2 - y3) / 2,
+         (x1 + x2) / 2,
+         (y1 + y2) / 2 
          );
-        //Smaller triangle 2
+        
         subTriangle
         (
-         n+1, //Number of recursions for the next call increased with 1
-         (x3 + x2) / 2 + (x2 - x1) / 2, //x coordinate of first corner
-         (y3 + y2) / 2 + (y2 - y1) / 2, //y coordinate of first corner
-         (x3 + x2) / 2 + (x3 - x1) / 2, //x coordinate of second corner
-         (y3 + y2) / 2 + (y3 - y1) / 2, //y coordinate of second corner
-         (x3 + x2) / 2, //x coordinate of third corner
-         (y3 + y2) / 2  //y coordinate of third corner
+         turt,
+         n+1, 
+         (x3 + x2) / 2, 
+         (y3 + y2) / 2, 
+         (x3 + x2) / 2 + (x2 - x1) / 2, 
+         (y3 + y2) / 2 + (y2 - y1) / 2,
+         (x3 + x2) / 2 + (x3 - x1) / 2, 
+         (y3 + y2) / 2 + (y3 - y1) / 2
          );
-        //Smaller triangle 3
+       
         subTriangle
         (
-         n+1, //Number of recursions for the next call increased with 1
-         (x1 + x3) / 2 + (x3 - x2) / 2, //x coordinate of first corner
-         (y1 + y3) / 2 + (y3 - y2) / 2, //y coordinate of first corner
-         (x1 + x3) / 2 + (x1 - x2) / 2, //x coordinate of second corner
-         (y1 + y3) / 2 + (y1 - y2) / 2, //y coordinate of second corner
-         (x1 + x3) / 2, //x coordinate of third corner
-         (y1 + y3) / 2  //y coordinate of third corner
+	 turt,
+         n+1, 
+         (x1 + x3) / 2 + (x1 - x2) / 2,
+         (y1 + y3) / 2 + (y1 - y2) / 2,
+         (x1 + x3) / 2,
+         (y1 + y3) / 2,
+         (x1 + x3) / 2 + (x3 - x2) / 2,
+         (y1 + y3) / 2 + (y3 - y2) / 2
          );
     }
 }
 
-//Drawing a Sierpinski Triangle
-void drawSierpinski(float x1, float y1, float x2, float y2, float x3, float y3)
+void drawSierpinski(turtle_t &turt, float x1, float y1, float x2, float y2, float x3, float y3)
 {
-    //Draw the 3 sides of the triangle as black lines
-    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-    glBegin(GL_LINES);
-    glVertex3f(x1,  y1,  0.0f);
-    glVertex3f(x2,  y2,  0.0f);
-    glVertex3f(x1,  y1,  0.0f);
-    glVertex3f(x3,  y3,  0.0f);
-    glVertex3f(x2,  y2,  0.0f);
-    glVertex3f(x3,  y3,  0.0f);
-    glEnd();
+	
+    turt.reset();
+    turt.clear();
+    turt.set_col(1.0, 1.0, 1.0);
+
+    turt.set_pos(x1,  y1);
+    turt.set_dir(60);
+    double dis = sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+    turt.forward(dis);
+
+    turt.set_pos(x2,  y2);
+    turt.set_dir(-60);
+    dis = sqrt((x2-x3)*(x2-x3) + (y2-y3)*(y2-y3));
+    turt.forward(dis);
     
-    //Call the recursive function that'll draw all the rest. The 3 corners of it are always the centers of sides, so they're averages
+    turt.set_pos(x3,  y3);
+    turt.set_dir(180);
+    dis = sqrt((x1-x3)*(x1-x3) + (y1-y3)*(y1-y3));
+    turt.forward(dis);
+
+    
     subTriangle
     (
-     1, //This represents the first recursion
-     (x1 + x2) / 2, //x coordinate of first corner
-     (y1 + y2) / 2, //y coordinate of first corner
-     (x1 + x3) / 2, //x coordinate of second corner
-     (y1 + y3) / 2, //y coordinate of second corner
-     (x2 + x3) / 2, //x coordinate of third corner
-     (y2 + y3) / 2  //y coordinate of third corner
+     turt,
+     1, 
+     (x1 + x2) / 2, 
+     (y1 + y2) / 2, 
+     (x1 + x3) / 2, 
+     (y1 + y3) / 2, 
+     (x2 + x3) / 2, 
+     (y2 + y3) / 2  
      );
 }
 
 void render_drawing(turtle_t &turt)
 {
-    int h = 640, w = 480;
-    drawSierpinski(10, h - 10, w - 10, h - 10, w / 2, 10);
+    drawSierpinski(turt, -0.3, 0.0, 0.0, 0.5196, 0.3, 0.0);
 }
