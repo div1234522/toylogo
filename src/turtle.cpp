@@ -95,8 +95,8 @@ void turtle_t::turn_right(const double _angle)
 
 void turtle_t::forward(const double _dist)  
 {
-    double x = _dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x;
-    double y = _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y;
+  double x = (_dist  * cos(DEGREE_TO_RAD(dir)) + pos.x) * sc;
+  double y =( _dist  * sin(DEGREE_TO_RAD(dir)) + pos.y) * sc;
     
     glColor4f(col.r, col.g, col.b, 1.0);
     glBegin(GL_LINES);
@@ -110,8 +110,8 @@ void turtle_t::forward(const double _dist)
 
 void turtle_t::back(const double _dist)   
 {
-    double x = _dist * sc * cos(DEGREE_TO_RAD(dir - 180)) + pos.x;
-    double y = _dist * sc * sin(DEGREE_TO_RAD(dir - 180)) + pos.y;
+  double x = (_dist  * cos(DEGREE_TO_RAD(dir - 180)) + pos.x) * sc;
+  double y = (_dist  * sin(DEGREE_TO_RAD(dir - 180)) + pos.y) * sc;
     
     glColor4f(col.r, col.g, col.b, 1.0);
     glBegin(GL_LINES);
@@ -127,13 +127,13 @@ void turtle_t::back(const double _dist)
 
 void turtle_t::forward_move(const double _dist)
 {
-    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir)) + pos.x,
-             _dist * sc * sin(DEGREE_TO_RAD(dir)) + pos.y);
+    set_pos (_dist  * cos(DEGREE_TO_RAD(dir)) + pos.x,
+             _dist  * sin(DEGREE_TO_RAD(dir)) + pos.y);
 }
 
 void turtle_t::backward_move(const double _dist)
 {
-    set_pos (_dist * sc * cos(DEGREE_TO_RAD(dir - 180)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir - 180)) + pos.y);
+    set_pos (_dist * cos(DEGREE_TO_RAD(dir - 180)) + pos.x, _dist * sc * sin(DEGREE_TO_RAD(dir - 180)) + pos.y);
 }
 
 void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
