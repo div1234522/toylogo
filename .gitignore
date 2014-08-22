@@ -1,3 +1,4 @@
+.gitignore
 src/CG_ToyLogo/CG_ToyLogo.xcodeproj/project.pbxproj
 src/CG_ToyLogo/CG_ToyLogo.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 src/CG_ToyLogo/CG_ToyLogo.xcodeproj/project.xcworkspace/xcshareddata/CG_ToyLogo.xccheckout
@@ -11,3 +12,4 @@ ToyLogo/ToyLogo.xcodeproj/project.xcworkspace/xcuserdata/rajendrahn.xcuserdatad/
 ToyLogo/ToyLogo.xcodeproj/xcuserdata/rajendrahn.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 src/Makefile
 src/toylogo
+src/toylogo_complete
